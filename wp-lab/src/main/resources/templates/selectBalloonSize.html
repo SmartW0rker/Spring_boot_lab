@@ -1,0 +1,95 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Balloon Order page - Balloon Size</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <style type = "text/css">
+        main {
+            width: 800px;
+            margin: auto;
+        }
+        table {
+            width:100%;
+        }
+        table, td, th {
+            border: 1px solid black;
+            padding:3px 2px;
+        }
+        section {
+            float: left;
+            margin: 0 1.5%;
+            width: 63%;
+        }
+        aside {
+            float: right;
+            margin: 0 1.5%;
+            width: 30%;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/balloons">WEB PROGRAMMING SHOP</a>
+
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+            <ul class="navbar-nav m-auto">
+                <li class="nav-item m-auto">
+                    <a class="nav-link active" href="/balloons">Home</a>
+                </li>
+
+            </ul>
+
+            <form class="form-inline my-2 my-lg-0">
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                           placeholder="Search...">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-secondary btn-number">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</nav>
+<main>
+    <header>
+        <h1>Balloon Order page - Select Balloon Size </h1>
+    </header>
+    <section>
+        <h2>Choose balloon size:</h2>
+        <form th:action="@{/BalloonOrder.do}" th:method="POST">
+            <input type="radio" name="size" value="Small"> Small <br/>
+            <input type="radio" name="size" value="Medium"> Medium <br/>
+            <input type="radio" name="size" value="Big"> Big <br/>
+            <input type="radio" name="size" value="Extra Big"> Extra Big <br/>
+            <input type='submit' value='Submit'/>
+        </form>
+
+
+        <br/>
+    </section>
+    <aside>
+        <table>
+            <tr>
+                <th colspan="2">
+                    Your Order Status
+                </th>
+            </tr>
+            <tr>
+                <td><b>Balloon Type </b></td>
+                <td th:text="${session.color}"></td>
+            </tr>
+        </table>
+    </aside>
+</main>
+
+
+</body>
+</html>

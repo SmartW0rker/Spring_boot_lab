@@ -1,0 +1,99 @@
+<html  xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="utf-8">
+    <title>Balloon Order page - Welcome and choose a Balloon</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <style type="text/css">
+        header,main {
+            width: 800px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/balloons">WEB PROGRAMMING SHOP</a>
+
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+            <ul class="navbar-nav m-auto">
+                <li class="nav-item m-auto">
+                    <a class="nav-link active" href="/balloons">Home</a>
+                </li>
+
+            </ul>
+
+            <form class="form-inline my-2 my-lg-0">
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                           placeholder="Search...">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-secondary btn-number">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<header>
+    <h1>Welcome to our Balloon Shop App</h1>
+</header>
+<main>
+    <option th:if="${hasError}" class="alert alert-danger" th:text="'You got this error ' + ${error}">
+
+
+    </option>
+
+    <div >
+        <h2>Balloons we have:</h2>
+        <table class="table">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Manufacturer</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:scope="row" th:each="balloon, stat : ${balloons}">
+                <td  th:text="${balloon.getName()}" ></td>
+                <td  th:text="${balloon.getDescription()}"></td>
+                <td><option th:if="${balloon.getManufacturer()!=null}"
+                th:text="${balloon.getManufacturer().getName()}"></option></td>
+                <td class="text-right">
+                    <form th:action="@{'/balloons/delete/{id}' (id=${balloon.getId()})}" th:method="POST">
+                        <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash">Delete</i></button>
+                    </form>
+                    <a th:href="@{'/balloons/edit-form/{id}' (id=${balloon.getId()})}" class="btn btn-sm btn-info"><i class="fa fa-trash">Edit</i></a>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+        <a href="/balloons/add-form">add new balloon</a>
+    </div>
+
+    <h2>Choose balloon color:</h2>
+    <form th:action="@{/selectBalloon}">
+        <input type="radio" name="color" value="Red Balloon"> Red Balloon<br/>
+        <input type="radio" name="color" value="Green Balloon"> Green Balloon<br/>
+        <input type="radio" name="color" value="Yellow Balloon"> Yellow Balloon<br/>
+        <input type="radio" name="color" value="Blue Balloon"> Blue Balloon<br/>
+        <button type="submit">Submit</button>
+    </form>
+
+
+    <br/>
+</main>
+</body>
+</html>

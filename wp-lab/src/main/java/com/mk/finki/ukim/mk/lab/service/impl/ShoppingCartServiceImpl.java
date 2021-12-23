@@ -5,10 +5,11 @@ import com.mk.finki.ukim.mk.lab.model.ShoppingCart;
 import com.mk.finki.ukim.mk.lab.model.User;
 import com.mk.finki.ukim.mk.lab.repository.jpa.ShoppingCartRepository;
 import com.mk.finki.ukim.mk.lab.service.ShoppingCartService;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
+@Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     ShoppingCartRepository shoppingCartRepository;
@@ -19,11 +20,11 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public void save(User user, LocalDateTime dateCreated, List<Order> orders) {
-        shoppingCartRepository.save(User,dateCreated,orders)
+      //  shoppingCartRepository.save(User,dateCreated,orders)
     }
 
     @Override
     public ShoppingCart findByUser(User user) {
-        return
+        return null;
     }
 }

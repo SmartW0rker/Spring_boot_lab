@@ -19,7 +19,7 @@ public class ShoppingCart {
     private User user;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dateCreated;
-    @OneToMany(mappedBy = "orderId")
+    @OneToMany(mappedBy = "orderId",fetch = FetchType.EAGER)
     private List<Order> orders;
 
     public ShoppingCart(User user, LocalDateTime dateCreated, List<Order> orders) {
@@ -30,5 +30,14 @@ public class ShoppingCart {
 
     public ShoppingCart() {
 
+    }
+
+    @Override
+    public String toString() {
+        return "ShoppingCart{" +
+                "id=" + id +
+                ", user=" + user.getName() +
+
+                '}';
     }
 }

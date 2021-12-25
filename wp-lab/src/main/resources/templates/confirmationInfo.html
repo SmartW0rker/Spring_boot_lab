@@ -81,11 +81,11 @@
     </tr>
     <tr>
       <td><b>Client Browser</b></td>
-      <td th:text="${clientAgent}"></td>
+      <td th:text="${session.thisOrder.getBalloonSize()}"></td>
     </tr>
     <tr>
       <td><b>Balloon Color </b></td>
-      <td th:text="${session.color}"></td>
+      <td th:text="${session.thisOrder.getBalloonColor()}"></td>
     </tr>
     <tr>
       <td><b>Balloon Size </b></td>

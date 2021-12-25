@@ -9,5 +9,7 @@ import java.util.List;
 
 public interface ShoppingCartService {
     public void save(User user, LocalDateTime dateCreated, List<Order> orders);
-    public ShoppingCart findByUser(User user);
+    public ShoppingCart findByUserId(Long id);
+
+    void save(ShoppingCart cart);
 }

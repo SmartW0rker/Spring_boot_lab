@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
 
@@ -20,11 +21,17 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public void save(User user, LocalDateTime dateCreated, List<Order> orders) {
-      //  shoppingCartRepository.save(User,dateCreated,orders)
+        ShoppingCart cart=new ShoppingCart(user,dateCreated,orders);
+        shoppingCartRepository.save(cart);
     }
 
     @Override
-    public ShoppingCart findByUser(User user) {
-        return null;
+    public ShoppingCart findByUserId(Long id) {
+        return shoppingCartRepository.findByUserId(id).orElse(null);
+    }
+
+    @Override
+    public void save(ShoppingCart cart) {
+        shoppingCartRepository.save(cart);
     }
 }

@@ -16,8 +16,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByName(String name) {
-        return userRepository.findByName(name)
-                .orElseThrow(()-> new UserNotFound(name));
+        return userRepository.findByName(name).orElse(null);
+               // .orElseThrow(()-> new UserNotFound(name));
+    }
+
+    @Override
+    public User save(User user) {
+        return userRepository.save(user);
     }
 
 }

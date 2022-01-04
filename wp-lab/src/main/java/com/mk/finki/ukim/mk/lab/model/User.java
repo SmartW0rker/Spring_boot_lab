@@ -1,15 +1,11 @@
 package com.mk.finki.ukim.mk.lab.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.Getter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.awt.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Data
@@ -27,8 +23,11 @@ public class User {
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate dateOfBirth;
     @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
-
     private List<ShoppingCart> carts;
+
+
+    @Enumerated(value = EnumType.STRING)
+    private Role role;
 
     public User(String username, String name, String surname,
                 String password, LocalDate dateOfBirth, List<ShoppingCart> carts) {

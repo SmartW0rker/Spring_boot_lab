@@ -70,7 +70,7 @@ public class ConfirmationInfoServlet extends HttpServlet {
         req.getSession().setAttribute("user",user);
         req.getSession().setAttribute("date",formatter.format(date));
         req.getSession().setAttribute("thisOrder",order);
-
+        resp.setContentType("text/html");
         this.springTemplateEngine.process("confirmationInfo.html",context,resp.getWriter());
     }
 }

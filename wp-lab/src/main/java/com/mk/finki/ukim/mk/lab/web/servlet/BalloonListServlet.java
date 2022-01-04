@@ -27,6 +27,7 @@ public class BalloonListServlet extends HttpServlet {
         context.setVariable("balloons",balloonService.listAll());
         if (context.getSession()!=null)
         req.getSession().setAttribute("color",req.getParameter("color"));
+        resp.setContentType("text/html");
         this.springTemplateEngine.process("listBalloons.html", context,resp.getWriter());
     }
 

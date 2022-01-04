@@ -27,6 +27,21 @@
 
             </ul>
 
+            <ul class="nav navbar-nav navbar-right">
+
+                <li class="nav-item"><a class="nav-link" href="#"><th:block th:if="${#request.getRemoteUser() != null}" th:text="${#request.getRemoteUser()}"></th:block></a></li>
+
+                <li th:if="${#request.getRemoteUser() != null}" class="nav-item"><a class="btn btn-light btn-sm ml-3" href="/logout">
+                    <i class="fa fa-shopping-cart"></i> Logout
+                </a></li>
+
+                <li th:if="${#request.getRemoteUser() == null}" class="nav-item"><a class="btn btn-light btn-sm ml-3" href="/login">
+                    <i class="fa fa-shopping-cart"></i> Log in
+                </a></li>
+
+            </ul>
+
+
             <form class="form-inline my-2 my-lg-0">
                 <div class="input-group input-group-sm">
                     <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
@@ -68,10 +83,15 @@
                 <td><option th:if="${balloon.getManufacturer()!=null}"
                 th:text="${balloon.getManufacturer().getName()}"></option></td>
                 <td class="text-right">
-                    <form th:action="@{'/balloons/delete/{id}' (id=${balloon.getId()})}" th:method="POST">
-                        <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash">Delete</i></button>
-                    </form>
-                    <a th:href="@{'/balloons/edit-form/{id}' (id=${balloon.getId()})}" class="btn btn-sm btn-info"><i class="fa fa-trash">Edit</i></a>
+                    <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                        <form th:action="@{'/balloons/delete/{id}' (id=${balloon.getId()})}" th:method="POST">
+                            <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash">Delete</i></button>
+                        </form>
+                    </th:block>
+                    <th:block sec:authorize="hasRole('ROLE_ADMIN')" >
+                        <a th:href="@{'/balloons/edit-form/{id}' (id=${balloon.getId()})}" class="btn btn-sm btn-info"><i class="fa fa-trash">Edit</i></a>
+                    </th:block>
+
                 </td>
 
             </tr>
@@ -79,9 +99,12 @@
         </table>
     </div>
 
-    <div>
+    <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+        <div>
         <a href="/balloons/add-form">add new balloon</a>
-    </div>
+        </div>
+    </th:block>
+
 
     <h2>Choose balloon color:</h2>
     <form th:action="@{/selectBalloon}">

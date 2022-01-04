@@ -19,10 +19,11 @@ public class SelectBalloonServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         WebContext context = new WebContext(req,resp,req.getServletContext());
         String color=req.getParameter("color");
         req.getSession().setAttribute("color",color);
+        resp.setContentType("text/html");
         this.springTemplateEngine.process("selectBalloonSize.html", context,resp.getWriter());
     }
 }
